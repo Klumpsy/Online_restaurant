@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerechten
+{% endblock %}
+
+{% block body %}
+	{% for message in app.flashes('succes') %}
+		<div data-closable class="alert-box callout success">
+			<i class="fa fa-check"></i>
+			{{ message }}
+			<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+				<span aria-hidden="true">&CircleTimes;</span>
+			</button>
+		</div>
+	{% endfor %}
+	<h2 class="grid-x align-center">Pas menu aan</h2>
+	<br>
+	<ul class="stats-list">
+		<li>
+			Gerechten
+			<span class="stats-list-label">
+				{{gerechten|length}}</span>
+		</li>
+		<li class="stats-list-positive">
+			Laatst toegevoegd
+			<span class="stats-list-label">{{gerechten[0].gerecht}}</span>
+		</li>
+		<li class="stats-list-positive">
+			Nieuw gerecht
+			<span class="stats-list-label">
+				<a href="{{ path('gerechten.maak')}}">Voeg toe</a>
+			</span>
+		</li>
+	</ul>
+	<table>
+		<thead>
+			<tr>
+				<th width="200">ID</th>
+				<th>Beschrijving</th>
+				<th width="150">Gerecht</th>
+				<th width="150">€</th>
+				<th width="150">Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for gerecht in gerechten%}
+				<tr>
+					<td>{{gerecht.id}}</td>
+					<td>{{gerecht.beschrijving}}</td>
+					<td>{{gerecht.gerecht}}</td>
+					<td>{{gerecht.prijs}}</td>
+					<td>
+						<a href="{{ path('gerechten.delete',{id: gerecht.id})}}">Delete</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

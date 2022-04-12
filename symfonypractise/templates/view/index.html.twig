@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View
+{% endblock %}
+
+{% block body %}
+	<h1>Hello
+		{{user.name}}
+		{{ user.surname}}
+		today is:
+		{{ day }}.</h1>
+	<h2>You are
+		{{user.age}}
+		years old.</h2>
+	<h3>You live in
+		{{user.town}}.</h3>
+
+	<ul>
+		{% for num in array %}
+			<li>{{num}}</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

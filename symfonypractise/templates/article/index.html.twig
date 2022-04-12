@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!
+{% endblock %}
+
+{% block body %}
+	{% if articles > 0 %}
+		<h1>{{articles.title}}</h1>
+	{% endif %}
+{% endblock %}
