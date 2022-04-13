@@ -22,6 +22,9 @@ class Gerecht
     #[ORM\Column(type: 'float', nullable: true)]
     private $Prijs;
 
+    #[ORM\Column(type: 'string', length: 225, nullable: true)]
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Gerecht
     public function setPrijs(?float $Prijs): self
     {
         $this->Prijs = $Prijs;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

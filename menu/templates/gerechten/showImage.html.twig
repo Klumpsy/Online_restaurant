@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image
+{% endblock %}
+
+{% block body %}
+	<h2 class="grid-x align-center">{{gerecht.gerecht}}</h2>
+	<br>
+
+	<div class="grid-x align-center">
+		<div class="cell small-4">
+			<img src="{{asset('images/' ~ gerecht.image)}}" alt="Foto van {{gerecht.gerecht}}">
+		</div>
+	</div>
+	<br>
+
+{% endblock %}

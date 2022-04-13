@@ -36,6 +36,19 @@ class GerechtenController extends AbstractController
         if ($form->isSubmitted()) {
             //Entity manager
             $em = $doctrine->getManager();
+            $image = $request->files->get('gerecht')['image'];
+
+            if ($image) {
+                $imageName = md5(uniqid()) . '.' . $image->guessClientExtension();
+            }
+
+            $image->move(
+                $this->getParameter('images_folder'),
+                $imageName
+            );
+
+            $gerecht->setImage($imageName);
+
             $em->persist($gerecht);
             $em->flush();
 
@@ -59,5 +72,13 @@ class GerechtenController extends AbstractController
         $this->addFlash('succes', "Gerecht is succesvol verwijderd");
 
         return $this->redirect($this->generateUrl('gerechten.aanpassen'));
+    }
+
+    #[Route('/show{id}', name: 'show')]
+    public function showPicture(Gerecht $gerecht)
+    {
+        return $this->render('gerechten/showImage.html.twig', [
+            'gerecht' => $gerecht,
+        ]);
     }
 }

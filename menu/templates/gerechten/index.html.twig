@@ -21,10 +21,12 @@
 			<span class="stats-list-label">
 				{{gerechten|length}}</span>
 		</li>
-		<li class="stats-list-positive">
-			Laatst toegevoegd
-			<span class="stats-list-label">{{gerechten[0].gerecht}}</span>
-		</li>
+		{% if gerechten|length > 0 %}
+			<li class="stats-list-positive">
+				Laatst toegevoegd
+				<span class="stats-list-label">{{gerechten[0].gerecht}}</span>
+			</li>
+		{% endif %}
 		<li class="stats-list-positive">
 			Nieuw gerecht
 			<span class="stats-list-label">
@@ -40,20 +42,28 @@
 				<th width="150">Gerecht</th>
 				<th width="150">€</th>
 				<th width="150">Delete</th>
+				<th width="120">Image</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for gerecht in gerechten%}
-				<tr>
-					<td>{{gerecht.id}}</td>
-					<td>{{gerecht.beschrijving}}</td>
-					<td>{{gerecht.gerecht}}</td>
-					<td>{{gerecht.prijs}}</td>
-					<td>
-						<a href="{{ path('gerechten.delete',{id: gerecht.id})}}">Delete</a>
-					</td>
-				</tr>
-			{% endfor %}
+			{% if gerechten|length > 0 %}
+				{% for gerecht in gerechten%}
+					<tr>
+						<td>{{gerecht.id}}</td>
+						<td>{{gerecht.beschrijving}}</td>
+						<td>{{gerecht.gerecht}}</td>
+						<td>{{gerecht.prijs}}</td>
+						<td>
+							<a href="{{ path('gerechten.delete',{id: gerecht.id})}}">Delete</a>
+						</td>
+						<td>
+							<a href="{{ path('gerechten.show',{id: gerecht.id})}}">
+								<i class="fa fa-solid fa-eye"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
 		</tbody>
 	</table>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Gerecht;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,6 +15,7 @@ class GerechtType extends AbstractType
     {
         $builder
             ->add('gerecht')
+            ->add('image', FileType::class, ['mapped' => false])
             ->add('beschrijving')
             ->add('Prijs')
             ->add('save', SubmitType::class);
