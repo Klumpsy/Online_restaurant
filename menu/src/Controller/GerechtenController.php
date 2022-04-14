@@ -20,7 +20,7 @@ class GerechtenController extends AbstractController
         $gerechten = $gerechtenData->findAll();
 
         return $this->render('gerechten/index.html.twig', [
-            'gerechten' => $gerechten,
+            'gerechten' => array_reverse($gerechten),
         ]);
     }
 

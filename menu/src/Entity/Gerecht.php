@@ -25,6 +25,9 @@ class Gerecht
     #[ORM\Column(type: 'string', length: 225, nullable: true)]
     private $image;
 
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Categorie', inversedBy: 'gerecht')]
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Gerecht
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
