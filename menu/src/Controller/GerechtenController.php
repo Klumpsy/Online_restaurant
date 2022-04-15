@@ -33,7 +33,7 @@ class GerechtenController extends AbstractController
         $form = $this->createForm(GerechtType::class, $gerecht);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             //Entity manager
             $em = $doctrine->getManager();
             $image = $request->files->get('gerecht')['image'];
