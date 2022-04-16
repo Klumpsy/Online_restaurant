@@ -1,46 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
-{% endblock %}
-
 {% block body %}
 	<div class="grid-x align-center">
 		<div class="cell small-8 medium-4 large-4">
 			<form method="post">
+				<h1 class="h3 mb-3 font-weight-normal">Login</h1>
+				<label for="inputUsername">Gebruikersnaam</label>
+				<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+				<label for="inputPassword">Wachtwoord</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 				{% if error %}
-					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					<div class="callout alert">Je wachtwoord en/of gebruikersnaam is onjuist</div>
 				{% endif %}
 
 				{% if app.user %}
-					<div class="mb-3">
-						You are logged in as
+					<div class="callout success">
+						Je bent ingelogd als:
 						{{ app.user.username }},
 						<a href="{{ path('app_logout') }}">Logout</a>
 					</div>
 				{% endif %}
 
-				<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-				<label for="inputUsername">Username</label>
-				<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-				<label for="inputPassword">Password</label>
-				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
 				<input
 				type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 				{#
-																																																				                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-																																																				                See https://symfony.com/doc/current/security/remember_me.html
-																																																				        
-																																																				                <div class="checkbox mb-3">
-																																																				                    <label>
-																																																				                        <input type="checkbox" name="_remember_me"> Remember me
-																																																				                    </label>
-																																																				                </div>
-																																																				            #}
+																																																																																																																																				                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																																																																																																																																				                See https://symfony.com/doc/current/security/remember_me.html
+																																																																																																																																				        
+																																																																																																																																				                <div class="checkbox mb-3">
+																																																																																																																																				                    <label>
+																																																																																																																																				                        <input type="checkbox" name="_remember_me"> Remember me
+																																																																																																																																				                    </label>
+																																																																																																																																				                </div>
+																																																																																																																																				            #}
 
-				<button class="btn btn-lg btn-primary" type="submit">
-					Sign in
+				<button class="button expanded success" type="submit">
+					Login
 				</button>
 			</form>
 		</div>

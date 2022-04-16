@@ -7,28 +7,39 @@
 					<li>
 						<a href="#">Start</a>
 					</li>
-					<li class="has-submenu">
-						<a href="#">Werknemer</a>
-						<ul class="submenu menu vertical" data-submenu>
-							<li>
-								<a href="#">Informatie</a>
-							</li>
-							<li>
-								<a href="{{ path('gerechten.maak') }}">Nieuw gerecht</a>
-							</li>
-							<li>
-								<a href="{{ path('gerechten.aanpassen') }}">Gerechten</a>
-							</li>
-						</ul>
-					</li>
+					{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+						<li class="has-submenu">
+							<a href="#">Werknemer</a>
+							<ul class="submenu menu vertical" data-submenu>
+								<li>
+									<a href="#">Informatie</a>
+								</li>
+								<li>
+									<a href="{{ path('gerechten.maak') }}">Nieuw gerecht</a>
+								</li>
+								<li>
+									<a href="{{ path('gerechten.aanpassen') }}">Gerechten</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
 				</ul>
 			</div>
 			<div class="top-bar-right">
 				<ul class="menu">
-					<li><input type="search" placeholder="Search"></li>
-					<li>
-						<button type="button" class="button primary">Search</button>
-					</li>
+					{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li>
+							<a href="{{ path('app_login')}}" class="button success">Login</a>
+						</li>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+						<li>
+							<a href="{{path('registratie')}}">Registreer</a>
+						</li>
+						<li>
+							<a href="{{ path('app_logout')}}" class="button alert">Logout</a>
+						</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
