@@ -3,9 +3,11 @@
 		<div class="top-bar">
 			<div class="top-bar-left">
 				<ul class="dropdown menu" data-dropdown-menu>
-					<a class="menu-text" href="{{ path('home') }}">MenuCard</a>
+					<a class="menu-text" href="{{ path('home') }}">
+						<i class="fa fa-utensils"></i>
+					</a>
 					<li>
-						<a href="#">Start</a>
+						<a href="#">Menukaart</a>
 					</li>
 					{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 						<li class="has-submenu">
