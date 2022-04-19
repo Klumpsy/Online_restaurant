@@ -10,4 +10,46 @@
 			<h4>Stel zelf een heerlijk menu samen.</h4>
 		</div>
 	</div>
+	<div class="grid-x">
+		<div class="basic-card small-12 medium-6">
+			<div class="basic-card-image">
+				<img src="{{asset('images/' ~ gerecht1.image)}}">
+			</div>
+			<div class="callout secondary">
+				<h5>{{gerecht1.gerecht}}</h5>
+				<p>Probeer nu:
+					{{gerecht1.beschrijving}}</p>
+			</div>
+			<div class="links callout primary">
+				<ul class="menu">
+					<li>
+						<a href="/menukaart">Gerechten</a>
+					</li>
+					<li>
+						<a href="/menukaart">Bestellen</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="basic-card small-12 medium-6">
+			<div class="basic-card-image">
+				<img src="{{asset('images/' ~ gerecht2.image)}}">
+			</div>
+			<div class="callout secondary">
+				<h5>{{gerecht2.gerecht}}</h5>
+				<p>Probeer nu:
+					{{gerecht2.beschrijving}}</p>
+			</div>
+			<div class="links callout primary">
+				<ul class="menu">
+					<li>
+						<a href="/menukaart">Menukaart</a>
+					</li>
+					<li>
+						<a href="/menukaart">Bestellen</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 {% endblock %}
