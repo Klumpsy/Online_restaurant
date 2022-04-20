@@ -14,7 +14,7 @@ class Bestelling
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $gerecht;
+    private $tafel;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $bestelnummer;
@@ -33,14 +33,14 @@ class Bestelling
         return $this->id;
     }
 
-    public function getGerecht(): ?string
+    public function getTafel(): ?string
     {
-        return $this->gerecht;
+        return $this->tafel;
     }
 
-    public function setGerecht(?string $gerecht): self
+    public function setTafel(?string $tafel): self
     {
-        $this->gerecht = $gerecht;
+        $this->tafel = $tafel;
 
         return $this;
     }

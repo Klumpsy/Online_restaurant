@@ -11,6 +11,15 @@
 			<button class="button primary">Hoofdgerecht</button>
 			<button class="button primary">Nagerecht</button>
 		</div>
+		{% for message in app.flashes('bestellen')%}
+			<div data-closable class="alert-box callout success">
+				<i class="fa fa-check"></i>
+				{{message}}
+				<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+					<span aria-hidden="true">&CircleTimes;</span>
+				</button>
+			</div>
+		{% endfor %}
 		<main class="grid-x grid-margin-x grid-margin-y align-center">
 			{% for gerecht in gerechten %}
 				<div class='gerecht-card card small-12 medium-6 large-3 cell text-center rounded'>
@@ -18,9 +27,12 @@
 						- nr:
 						{{gerecht.id}}</h3>
 					<div class="card-section">
-						<p>{{gerecht.beschrijving}}</p>
-						<p>
-							€{{gerecht.Prijs}}</p>
+						<div class="grid-x align-center">
+							<p>{{gerecht.beschrijving}}
+								€{{gerecht.Prijs}}
+							</p>
+						</div>
+						<a class="hollow button warning" href="{{path('app_bestellen',{id: gerecht.id})}}">bestel</a>
 					</div>
 					<div class="card-image">
 						<img src="{{asset('images/' ~ gerecht.image)}}" alt="{{gerecht.beschrijving}}">
