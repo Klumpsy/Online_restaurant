@@ -6,6 +6,24 @@
 {% set totaalBedrag = 0 %}
 {% block body %}
 	<div class="grid-y align-center">
+		{% for message in app.flashes('status') %}
+			<div data-closable class="alert-box callout success">
+				<i class="fa fa-check"></i>
+				{{ message }}
+				<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+					<span aria-hidden="true">&CircleTimes;</span>
+				</button>
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('delete') %}
+			<div data-closable class="alert-box callout alert">
+				<i class="fa fa-check"></i>
+				{{ message }}
+				<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+					<span aria-hidden="true">&CircleTimes;</span>
+				</button>
+			</div>
+		{% endfor %}
 		<h2>Bestelling</h2>
 		<div>
 			<table>
@@ -20,16 +38,42 @@
 				<tbody>
 					{% for bestelling in bestellingen %}
 						{% set totaalBedrag = totaalBedrag + bestelling.prijs %}
+
 						<tr>
 							<td>{{bestelling.bestelNummer}}</td>
 							<td>{{bestelling.name}}</td>
-							<td>{{bestelling.prijs}}</td>
+							<td>€{{bestelling.prijs}},-</td>
 							<td>{{bestelling.status}}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<h4>Totaal: €{{totaalBedrag}}</h4>
-		</div>
+							<td>
+								{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+									<ul class="vertical menu accordion-menu" data-accordion-menu>
+										<li>
+											<a href="#">Verander Status</a>
+											<ul class="menu vertical nested">
+												<li>
+													<a href="{{ path('status',{id: bestelling.id, status: 'open'}) }}">Open</a>
+												</li>
+												<li>
+													<a href="{{ path('status',{id: bestelling.id, status: 'voltooid'}) }}">Voltooid</a>
+												</li>
+												<li>
+													<a href="{{ path('status',{id: bestelling.id, status: 'Gearchiveerd'}) }}">Naar archief</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</td>
+							</td>
+							<td>
+								<a href="{{path('delete',{id: bestelling.id})}}">
+									<i class="fa fa-trash"></i>
+								</a>
+							</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<h4>Totaal: €{{totaalBedrag}},-</h4>
 	</div>
-{% endblock %}
+</div>{% endblock %}

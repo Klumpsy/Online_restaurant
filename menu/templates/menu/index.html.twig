@@ -6,10 +6,11 @@
 {% block body %}
 	<div class=" grid-y grid-padding-x">
 		<div class="grid-x align-center">
-			<button class="button primary">Drinken</button>
-			<button class="button primary">Voorgerecht</button>
-			<button class="button primary">Hoofdgerecht</button>
-			<button class="button primary">Nagerecht</button>
+			<a href={{path('app_menu',{filter: 'drinken'} )}} class="button primary">Drinken</a>
+			<a href={{path('app_menu',{filter: 'voorgerecht'} )}} class="button primary">Voorgerecht</a>
+			<a href={{path('app_menu',{filter: 'hoofdgerecht'} )}} class="button primary">Hoofdgerecht</a>
+			<a href={{path('app_menu',{filter: 'nagerecht'} )}} class="button primary">Nagerecht</a>
+			<a href={{path('app_menu',{filter: null} )}} class="button primary">Geen Filter</a>
 		</div>
 		{% for message in app.flashes('bestellen')%}
 			<div data-closable class="alert-box callout success">

@@ -181,6 +181,14 @@
   overflow: scroll;
 }
 
+.fa-trash { 
+  color: rgb(220, 119, 119);
+}
+
+.fa-trash:hover { 
+  color: rgb(157, 40, 40);
+}
+
 /*Footer section*/
 
 #engadget-footer-sitemap-container {

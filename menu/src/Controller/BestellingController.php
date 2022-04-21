@@ -34,6 +34,7 @@ class BestellingController extends AbstractController
         $bestelling->setPrijs($gerecht->getPrijs());
         $bestelling->setStatus('open');
 
+        //Entity manager 
         $em = $doctrine->getManager();
         $em->persist($bestelling);
         $em->flush();
@@ -41,5 +42,33 @@ class BestellingController extends AbstractController
         $this->addFlash('bestellen', "Bestelling: " . $bestelling->getName() . " is ontvangen! We gaan voor u aan de slag!");
 
         return $this->redirect($this->generateUrl('app_menu'));
+    }
+
+    #[Route('/status/{id},{status}', name: 'status')]
+    public function status($id, $status, ManagerRegistry $doctrine)
+    {
+        //Entity manager
+        $em = $doctrine->getManager();
+        $bestelling = $em->getRepository(Bestelling::class)->find($id);
+
+        $bestelling->setStatus($status);
+        $em->flush();
+
+        $this->addFlash('status', "Status van bestelling: " . $bestelling->getName() . " is aangepast.");
+
+        return $this->redirect($this->generateUrl('app_bestelling'));
+    }
+
+    #[Route('/delete{id}', name: 'delete')]
+    public function delete($id, ManagerRegistry $doctrine)
+    {
+        $em = $doctrine->getManager();
+        $bestelling = $em->getRepository(Bestelling::class)->find($id);
+        $em->remove($bestelling);
+        $em->flush();
+
+        $this->addFlash('delete', "Gerecht is succesvol verwijderd");
+
+        return $this->redirect($this->generateUrl('app_bestelling'));
     }
 }
