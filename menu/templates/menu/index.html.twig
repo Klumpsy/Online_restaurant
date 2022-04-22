@@ -10,7 +10,7 @@
 			<a href={{path('app_menu',{filter: 'voorgerecht'} )}} class="button primary">Voorgerecht</a>
 			<a href={{path('app_menu',{filter: 'hoofdgerecht'} )}} class="button primary">Hoofdgerecht</a>
 			<a href={{path('app_menu',{filter: 'nagerecht'} )}} class="button primary">Nagerecht</a>
-			<a href={{path('app_menu',{filter: null} )}} class="button primary">Geen Filter</a>
+			<a href={{path('app_menu',{filter: ''} )}} class="button primary">Geen Filter</a>
 		</div>
 		{% for message in app.flashes('bestellen')%}
 			<div data-closable class="alert-box callout success">

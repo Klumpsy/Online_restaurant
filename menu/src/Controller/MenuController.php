@@ -16,9 +16,32 @@ class MenuController extends AbstractController
     public function menukaart(string $filter = null, GerechtRepository $gerechtenData, CategorieRepository $categorie): Response
     {
         if ($filter !== null) {
-            $gerechtenFiltered = $gerechtenData->findBy(['gerecht' => 'Biefstuk']);
+            $databaseFilter = "";
 
-            $gerechten = $gerechtenFiltered;
+            switch ($filter) {
+                case $filter === 'drinken':
+                    $databaseFilter = 1;
+                    break;
+                case $filter === 'voorgerecht':
+                    $databaseFilter = 2;
+                    break;
+                case $filter === 'hoofdgerecht':
+                    $databaseFilter = 3;
+                    break;
+                case $filter === 'dessert':
+                    $databaseFilter = 4;
+                    break;
+                default:
+                    $databaseFilter = "";
+            }
+
+            $gerechtenFiltered = $categorie->find($databaseFilter);
+
+            if ($gerechtenFiltered) {
+                $gerechten = $gerechtenFiltered->getGerecht();
+            } else {
+                $gerechten = [];
+            }
         } else {
             $gerechten = $gerechtenData->findAll();
         }
