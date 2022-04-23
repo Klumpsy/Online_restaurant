@@ -10,14 +10,21 @@
 						<a href="{{ path('app_menu')}}">Menukaart</a>
 					</li>
 					<li>
-						<a href="{{ path('app_bestelling')}}">Mijn bestelling</a>
+						<a href="{{ path('app_bestelling')}}">
+							{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+								Bestellingen
+							{% endif %}
+							{% if not is_granted('IS_AUTHENTICATED_FULLY')%}
+								Mijn bestelling
+							{% endif %}
+						</a>
 					</li>
 					{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 						<li class="has-submenu">
 							<a href="#">Werknemer</a>
 							<ul class="submenu menu vertical" data-submenu>
 								<li>
-									<a href="#">Informatie</a>
+									<a href="{{ path('app_tafel_number')}}">Tafel toevoegen</a>
 								</li>
 								<li>
 									<a href="{{ path('gerechten.maak') }}">Nieuw gerecht</a>

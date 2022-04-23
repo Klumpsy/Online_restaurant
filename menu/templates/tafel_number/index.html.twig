@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tafel toevoegen
+{% endblock %}
+
+{% block body %}
+	{% for message in app.flashes('tafel') %}
+		<div data-closable class="alert-box callout success">
+			<i class="fa fa-check"></i>
+			{{ message }}
+			<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+				<span aria-hidden="true">&CircleTimes;</span>
+			</button>
+		</div>
+	{% endfor %}
+	<h2 class="grid-x align-center">Voeg tafel toe</h2>
+	<br>
+
+	<div class="grid-x align-center grid-margin-x">
+		<div class="cell small-4">
+			<table>
+				<thead>
+					<tr>
+						<th width="50">TafelNr</th>
+						<th>Aantal personen</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for tafel in tafels%}
+						<tr>
+							<td>{{tafel.TafelNr}}</td>
+							<td>{{tafel.persons}}</td>
+							<td>
+								<a href="#">Delete</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="cell small-4">
+			{{form(addTableForm)}}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
