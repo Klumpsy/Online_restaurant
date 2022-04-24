@@ -24,7 +24,7 @@ class TafelNumberController extends AbstractController
         $tableForm->handleRequest($request);
 
         if ($tableForm->isSubmitted() && $tableForm->isValid()) {
-            $input = $tableForm->getData();
+            $tafel->setStatus('open');
 
             $em = $doctrine->getManager();
             $em->persist($tafel);
@@ -40,5 +40,45 @@ class TafelNumberController extends AbstractController
             'addTableForm' => $tableForm->createView(),
             'tafels' => $allTafels,
         ]);
+    }
+
+    #[Route('/tafel/change_status{id},{status}', name: 'app_tafel_status_change')]
+    public function handleStatus($status, $id, ManagerRegistry $doctrine): Response
+    {
+
+        $em = $doctrine->getManager();
+
+        $tafel = $em->getRepository(TafelNumber::class)->find($id);
+
+        if (!$tafel) {
+            throw $this->createNotFoundException(
+                'Sorry, tafel met id ' . $id . ' bestaat niet.'
+            );
+        }
+        $tafel->setStatus($status);
+        $em->flush();
+
+        $this->addFlash('tafel_update', 'Tafelstatus is geüpdate.');
+        return $this->redirectToRoute('app_tafel_number');
+    }
+
+    #[Route('/tafel/delete{id}', name: 'app_tafel_status_delete')]
+    public function deleteTafel($id, ManagerRegistry $doctrine): Response
+    {
+
+        $em = $doctrine->getManager();
+        $tafel = $em->getRepository(TafelNumber::class)->find($id);
+
+        if (!$tafel) {
+            throw $this->createNotFoundException(
+                'Sorry, tafel met id ' . $id . ' bestaat niet.'
+            );
+        }
+
+        $em->remove($tafel);
+        $em->flush();
+
+        $this->addFlash('tafel_update', 'Tafel is verwijderd');
+        return $this->redirectToRoute('app_tafel_number');
     }
 }

@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
-
 {% block body %}
 	<div class="hero-section">
 		<div class="hero-section-text">
@@ -26,7 +23,7 @@
 						<a href="/menukaart">Gerechten</a>
 					</li>
 					<li>
-						<a href="/menukaart">Bestellen</a>
+						<a href="{{path('app_bestellen',{id: gerecht1.id})}}">Bestellen</a>
 					</li>
 				</ul>
 			</div>
@@ -46,7 +43,7 @@
 						<a href="/menukaart">Menukaart</a>
 					</li>
 					<li>
-						<a href="/menukaart">Bestellen</a>
+						<a href="{{path('app_bestellen',{id: gerecht2.id})}}">Bestellen</a>
 					</li>
 				</ul>
 			</div>

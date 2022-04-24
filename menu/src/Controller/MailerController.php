@@ -34,9 +34,8 @@ class MailerController extends AbstractController
 
         if ($emailForm->isSubmitted()) {
             $input = $emailForm->getData();
-
             //Check how to get values from TafelNumber class
-            $tafel = $input['tafelNr'];
+            $tafel = $input['tafelNr']->getTafelnr();
             $text = $input['bericht'];
 
             $email = (new TemplatedEmail())

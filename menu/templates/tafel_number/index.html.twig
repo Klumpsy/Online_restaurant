@@ -13,6 +13,15 @@
 			</button>
 		</div>
 	{% endfor %}
+	{% for message in app.flashes('tafel_update') %}
+		<div data-closable class="alert-box callout warning">
+			<i class="fa fa-check"></i>
+			{{ message }}
+			<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+				<span aria-hidden="true">&CircleTimes;</span>
+			</button>
+		</div>
+	{% endfor %}
 	<h2 class="grid-x align-center">Voeg tafel toe</h2>
 	<br>
 
@@ -23,15 +32,32 @@
 					<tr>
 						<th width="50">TafelNr</th>
 						<th>Aantal personen</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for tafel in tafels%}
-						<tr>
+					{% for tafel in tafels|sort((a,b) => a.tafelNr <=> b.tafelNr)%}
+						<tr class="{% if tafel.status == 'bezet'%} tafel_bezet {% endif %} tafel_open">
 							<td>{{tafel.TafelNr}}</td>
 							<td>{{tafel.persons}}</td>
+							<td>{{tafel.status}}</td>
 							<td>
-								<a href="#">Delete</a>
+								<ul class="dropdown menu" data-dropdown-menu>
+									<li class="has-submenu">
+										<a href="#">Tafel</a>
+										<ul class="submenu menu vertical" data-submenu>
+											<li>
+												<a href="{{path('app_tafel_status_change',{id: tafel.id, status: 'open'})}}">Open</a>
+											</li>
+											<li>
+												<a href="{{path('app_tafel_status_change',{id: tafel.id, status: 'bezet'})}}">Bezet</a>
+											</li>
+											<li>
+												<a href="{{path('app_tafel_status_delete',{id: tafel.id})}}">Delete</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
 							</td>
 						</tr>
 					{% endfor %}
